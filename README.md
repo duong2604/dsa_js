@@ -45,4 +45,23 @@
 
 🎯 **Mục tiêu:** Thành thạo giải thuật LeetCode Hard / phỏng vấn cấp cao.
 
-- Backtra
+- Backtracking
+- Dynamic Programming (DP)
+- Greedy
+- Graph nâng cao
+- Advanced Bit Manipulation
+- Advanced Sliding Window
+- Geometry
+
+---
+
+## Giai đoạn 5 – Luyện phỏng vấn chuyên sâu
+
+🎯 **Mục tiêu:** Làm chủ các patterns, tự tin giải LeetCode.
+
+- Kỹ năng phân tích đề
+- Phân tích Test Case
+- Kỹ năng brute-force rồi tối ưu
+- Template cho từng dạng
+- Luyện mock interview
+- Tư duy code sạch, tối ưu, scalable
