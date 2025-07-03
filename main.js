@@ -1,7 +1,9 @@
-import * as list from "./list.js";
+import { fundamental } from "./first_stage/index.js";
 
 function main() {
-  list.list();
+  console.log("Starting the main function");
+  fundamental.run();
+  console.log("Finished the main function");
 }
 
 main();
