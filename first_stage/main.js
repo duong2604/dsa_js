@@ -253,6 +253,201 @@ function moveZeroes(nums) {
   return nums;
 }
 
+/**------------------------------------------------------------------------------------------------------------------ */
+// Bài 7: Maximum Sum of Subarray of Size K (LeetCode 209)
+// Đề bài (LeetCode 209):
+// Cho mảng số nguyên nums và số nguyên k.
+// Hãy tìm tổng lớn nhất của mọi subarray có độ dài k.
+// Input: nums = [1,2,3,4,5], k = 3
+// Output: 12
+
+function maximumSumOfSubarrayOfSizeK(nums, k) {
+  if (k > nums.length) return 0;
+  let maxSum = 0;
+  let currentSum = 0;
+
+  for (let i = 0; i < k; i++) {
+    currentSum += nums[i];
+  }
+  maxSum = currentSum;
+  for (let i = k; i < nums.length; i++) {
+    currentSum += nums[i] - nums[i - k];
+    maxSum = Math.max(maxSum, currentSum);
+  }
+  return maxSum;
+}
+
+// Trả về subArray có tổng lớn nhất
+function maximumSumOfSubarrayOfSizeKWithElements(nums, k) {
+  let maxSum = 0;
+  let subArray = [];
+  if (k > nums.length) {
+    return {
+      maxSum: 0,
+      subArray: [],
+    };
+  }
+
+  let currentSum = 0;
+  let start = 0;
+  let end = 0;
+
+  for (let i = 0; i < k; i++) {
+    currentSum += nums[i];
+  }
+  maxSum = currentSum;
+  end = k - 1;
+  subArray = nums.slice(start, end + 1);
+
+  for (let i = k; i < nums.length; i++) {
+    currentSum += nums[i] - nums[i - k];
+
+    if (currentSum > maxSum) {
+      maxSum = currentSum;
+      start = i - k + 1;
+      end = i;
+    }
+  }
+
+  return {
+    maxSum,
+    subArray: nums.slice(start, end + 1),
+  };
+}
+
+/**------------------------------------------------------------------------------------------------------------------ */
+// Bài 8: Longest Substring Without Repeating Characters
+// Đề bài (LeetCode 3):
+// Cho string s.
+// Trả về độ dài dài nhất của substring không lặp ký tự.
+// Input: s = "abcabcbb"
+// Output: 3
+// → Substring “abc” dài nhất không lặp.
+// Ví dụ:
+// Input: s = "bbbbb"
+// Output: 1
+
+function longestSubStringWithoutRepeatingCharacters(s) {
+  const set = new Set();
+  let left = 0;
+  let right = 0;
+  let maxLength = 0;
+
+  for (right = 0; right < s.length; right++) {
+    if (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+
+  return maxLength;
+}
+
+// Nâng cao hơn: Trả về substring dài nhất không lặp
+function longestSubStringWithoutRepeatingCharactersWithElements(s) {
+  const set = new Set();
+  let left = 0;
+  let right = 0;
+  let maxLength = 0;
+  let start = 0;
+  let end = 0;
+
+  for (right = 0; right < s.length; right++) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    if (maxLength < right - left + 1) {
+      maxLength = right - left + 1;
+      start = left;
+      end = right;
+    }
+  }
+
+  return {
+    maxLength,
+    substring: s.slice(start, end + 1),
+  };
+}
+
+/**------------------------------------------------------------------------------------------------------------------ */
+// Bài 9: Minimum Size Subarray Sum
+// Đề bài (LeetCode 209):
+// Cho array nums chứa các số nguyên dương và một số nguyên dương target.
+// Hãy tìm độ dài nhỏ nhất của subarray liên tiếp có tổng ≥ target.
+// Nếu không tồn tại subarray nào thỏa mãn, trả về 0.
+// Ví dụ
+// Input: nums = [2,3,1,2,4,3], target = 7
+// Output: 2
+// Vì subarray [4,3] có tổng = 7 → độ dài = 2.
+
+function minimumSizeSubarraySum(nums, target) {
+  let minLength = Infinity;
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 1; j < nums.length; j++) {
+      let currentSum = nums[i] + nums[j];
+      if (currentSum >= target) {
+        let length = j - i + 1;
+        if (length < minLength && j > i) {
+          minLength = length;
+        }
+      }
+    }
+  }
+
+  return minLength === Infinity ? 0 : minLength;
+}
+
+// Nâng cao hơn: Sử dụng Sliding Window để tìm độ dài nhỏ nhất của subarray có tổng ≥ target
+function minimumSizeSubarraySumSlidingWindow(nums, target) {
+  let left = 0;
+  let currentSum = 0;
+  let minLength = Infinity;
+
+  for (let right = 0; right < nums.length; right++) {
+    currentSum += nums[right];
+
+    while (currentSum >= target) {
+      minLength = Math.min(minLength, right - left + 1);
+      currentSum -= nums[left];
+      left++;
+    }
+  }
+  return minLength;
+}
+
+/**------------------------------------------------------------------------------------------------------------------ */
+// Bài 10: Longest Subarray With Sum ≤ K
+// Cho array nums chứa các số nguyên dương, và số nguyên dương k.
+// Hãy tìm độ dài dài nhất của subarray liên tiếp có tổng ≤ k.
+
+// Ví dụ
+// Input: nums = [1,2,1,0,1,1,0], k = 4
+// Output: 5
+// → Vì subarray dài nhất có tổng ≤ 4 là [1,0,1,1,0] tổng = 3.
+
+function longestSubarraySumLEK(nums, k) {
+  let left = 0;
+  let sum = 0;
+  let maxLength = 0;
+
+  for (let right = 0; right < nums.length; right++) {
+    sum += nums[right];
+
+    while (sum > k) {
+      sum -= nums[left];
+      left++;
+    }
+
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+
+  return maxLength;
+}
+
 function run() {
   // console.log(
   //   "twoSumBruteForce function is called",
@@ -291,7 +486,62 @@ function run() {
   //   "maximumSubarrayWithElements function is called",
   //   maximumSubarrayWithElements([-2, 1, -3, 4, -1, 2, 1, -5, 4])
   // );
+  // console.log("moveZeroes function is called", moveZeroes([0, 1, 0, 3, 12]));
+  // console.log(
+  //   "maximumSumOfSubarrayOfSizeK function is called",
+  //   maximumSumOfSubarrayOfSizeK([1, 2, 3, 4, 5], 3)
+  // );
+  // console.log(
+  //   "maximumSumOfSubarrayOfSizeKWithElements function is called",
+  //   maximumSumOfSubarrayOfSizeKWithElements([5, 2, -1, 0, 3], 3)
+  // );
+  // console.log(
+  //   "longestSubStringWithoutRepeatingCharacters function is called",
+  //   longestSubStringWithoutRepeatingCharacters("abcabcbb")
+  // );
+  // console.log(
+  //   "longestSubStringWithoutRepeatingCharactersWithElements function is called",
+  //   longestSubStringWithoutRepeatingCharactersWithElements("pwwkew")
+  // );
+  // console.log(
+  //   "minimumSizeSubarraySum function is called",
+  //   minimumSizeSubarraySum([2, 3, 1, 2, 4, 3], 7)
+  // );
 
-  console.log("moveZeroes function is called", moveZeroes([0, 1, 0, 3, 12]));
+  // console.log(
+  //   "minimumSizeSubarraySumSlidingWindow",
+  //   minimumSizeSubarraySumSlidingWindow([2, 3, 1, 2, 4, 3], 7)
+  // );
+
+  console.log(
+    "longestSubarraySumLEK",
+    longestSubarraySumLEK([1, 2, 1, 0, 1, 1, 0], 4)
+  );
 }
 export { run };
+
+// | #  | Chủ đề                         | LeetCode # | Tên bài                                        | Link bài tập                                                                          | Đã học / Gợi ý luyện |
+// | -- | ------------------------------ | ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------- |
+// | 1  | Array – Hash Map               | 1          | Two Sum                                        | [Link](https://leetcode.com/problems/two-sum/)                                        | Đã học               |
+// | 2  | Array – Hash Map Counting      | 169        | Majority Element                               | [Link](https://leetcode.com/problems/majority-element/)                               | Đã học               |
+// | 3  | Array – Hash Set               | 217        | Contains Duplicate                             | [Link](https://leetcode.com/problems/contains-duplicate/)                             | Đã học               |
+// | 4  | Array – Hash Map               | 136        | Single Number                                  | [Link](https://leetcode.com/problems/single-number/)                                  | Gợi ý luyện          |
+// | 5  | Array – Hash Map               | 387        | First Unique Character in a String             | [Link](https://leetcode.com/problems/first-unique-character-in-a-string/)             | Gợi ý luyện          |
+// | 6  | Array – Hash Map               | 49         | Group Anagrams                                 | [Link](https://leetcode.com/problems/group-anagrams/)                                 | Gợi ý luyện          |
+// | 7  | Array – Hash Map               | 128        | Longest Consecutive Sequence                   | [Link](https://leetcode.com/problems/longest-consecutive-sequence/)                   | Gợi ý luyện          |
+// | 8  | Array – Two Pointer            | 26         | Remove Duplicates from Sorted Array            | [Link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)            | Đã học               |
+// | 9  | Array – Two Pointer            | 283        | Move Zeroes                                    | [Link](https://leetcode.com/problems/move-zeroes/)                                    | Đã học               |
+// | 10 | Array – Two Pointer            | 27         | Remove Element                                 | [Link](https://leetcode.com/problems/remove-element/)                                 | Gợi ý luyện          |
+// | 11 | Array – Two Pointer            | 167        | Two Sum II – Input Array Is Sorted             | [Link](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)               | Gợi ý luyện          |
+// | 12 | Array – Two Pointer            | 75         | Sort Colors (Dutch National Flag)              | [Link](https://leetcode.com/problems/sort-colors/)                                    | Gợi ý luyện          |
+// | 13 | Array – Prefix Sum/Kadane      | 53         | Maximum Subarray                               | [Link](https://leetcode.com/problems/maximum-subarray/)                               | Đã học               |
+// | 14 | Array – Prefix Sum/Kadane      | 152        | Maximum Product Subarray                       | [Link](https://leetcode.com/problems/maximum-product-subarray/)                       | Gợi ý luyện          |
+// | 15 | Array – Prefix Sum             | 560        | Subarray Sum Equals K                          | [Link](https://leetcode.com/problems/subarray-sum-equals-k/)                          | Gợi ý luyện          |
+// | 16 | Sliding Window – Fixed Size    | 643        | Maximum Average Subarray I                     | [Link](https://leetcode.com/problems/maximum-average-subarray-i/)                     | Đã học (tương tự)    |
+// | 17 | Sliding Window – Fixed Size    | 567        | Permutation in String                          | [Link](https://leetcode.com/problems/permutation-in-string/)                          | Gợi ý luyện          |
+// | 18 | Sliding Window – Variable Size | 3          | Longest Substring Without Repeating Characters | [Link](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | Đã học               |
+// | 19 | Sliding Window – Variable Size | 209        | Minimum Size Subarray Sum                      | [Link](https://leetcode.com/problems/minimum-size-subarray-sum/)                      | Đã học               |
+// | 20 | Sliding Window – Variable Size | (Custom)   | Longest Subarray With Sum ≤ K                  | (Custom problem)                                                                      | Đã học               |
+// | 21 | Sliding Window – Variable Size | 424        | Longest Repeating Character Replacement        | [Link](https://leetcode.com/problems/longest-repeating-character-replacement/)        | Gợi ý luyện          |
+// | 22 | Sliding Window – Variable Size | 1004       | Max Consecutive Ones III                       | [Link](https://leetcode.com/problems/max-consecutive-ones-iii/)                       | Gợi ý luyện          |
+// | 23 | Sliding Window – Variable Size | 121        | Best Time to Buy and Sell Stock                | [Link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)                | Gợi ý luyện          |
