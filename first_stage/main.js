@@ -533,7 +533,7 @@ export { run };
 // | 9  | Array – Two Pointer            | 283        | Move Zeroes                                    | [Link](https://leetcode.com/problems/move-zeroes/)                                    | Đã học               |
 // | 10 | Array – Two Pointer            | 27         | Remove Element                                 | [Link](https://leetcode.com/problems/remove-element/)                                 | Gợi ý luyện          |
 // | 11 | Array – Two Pointer            | 167        | Two Sum II – Input Array Is Sorted             | [Link](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)               | Gợi ý luyện          |
-// | 12 | Array – Two Pointer            | 75         | Sort Colors (Dutch National Flag)              | [Link](https://leetcode.com/problems/sort-colors/)                                    | Gợi ý luyện          |
+// | 12 | Array – Two Pointer            | 75         | Sort Coolrs (Dutch National Flag)              | [Link](https://leetcode.com/problems/sort-colors/)                                    | Gợi ý luyện          |
 // | 13 | Array – Prefix Sum/Kadane      | 53         | Maximum Subarray                               | [Link](https://leetcode.com/problems/maximum-subarray/)                               | Đã học               |
 // | 14 | Array – Prefix Sum/Kadane      | 152        | Maximum Product Subarray                       | [Link](https://leetcode.com/problems/maximum-product-subarray/)                       | Gợi ý luyện          |
 // | 15 | Array – Prefix Sum             | 560        | Subarray Sum Equals K                          | [Link](https://leetcode.com/problems/subarray-sum-equals-k/)                          | Gợi ý luyện          |
