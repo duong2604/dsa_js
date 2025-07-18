@@ -488,28 +488,28 @@ export { run };
 // 🎯 1. Array + Hash Map / Hash Set
 // | LeetCode ID | Title                          | Ghi chú                                   |
 // | ----------- | ------------------------------ | ----------------------------------------- |
-// | 1           | Two Sum                        | Dạng cơ bản Hash Map (find pair with sum) |
-// | 217         | Contains Duplicate             | Hash Set kiểm tra phần tử trùng           |
-// | 169         | Majority Element               | Hash Map đếm tần suất                     |
-// | 454         | 4Sum II                        | Hash Map lưu sum 2 mảng                   |
-// | 594         | Longest Harmonious Subsequence | Hash Map đếm tần suất + hiệu 1            |
+// | 1           | Two Sum                        | Dạng cơ bản Hash Map (find pair with sum) | x
+// | 217         | Contains Duplicate             | Hash Set kiểm tra phần tử trùng           | x
+// | 169         | Majority Element               | Hash Map đếm tần suất                     | x
+// | 454         | 4Sum II                        | Hash Map lưu sum 2 mảng                   | x
+// | 594         | Longest Harmonious Subsequence | Hash Map đếm tần suất + hiệu 1            | x
 
 // 🎯 2. Array + Two Pointers
 // LeetCode ID	Title	Ghi chú
 // | LeetCode ID | Title                               | Ghi chú                                        |
 // | ----------- | ----------------------------------- | ---------------------------------------------- |
-// | 26          | Remove Duplicates from Sorted Array | Dạng cơ bản Two Pointers                       |
-// | 27          | Remove Element                      | Two Pointers overwrite elements                |
-// | 283         | Move Zeroes                         | Two Pointers giữ non-zero ở đầu                |
-// | 80          | Remove Duplicates II                | Two Pointers cho phép mỗi phần tử tối đa k lần |
+// | 26          | Remove Duplicates from Sorted Array | Dạng cơ bản Two Pointers                       | x
+// | 27          | Remove Element                      | Two Pointers overwrite elements                | x
+// | 283         | Move Zeroes                         | Two Pointers giữ non-zero ở đầu                | x
+// | 80          | Remove Duplicates II                | Two Pointers cho phép mỗi phần tử tối đa k lần | x
 
 // 🎯 3. Array + Prefix Sum / Kadane
 // LeetCode ID	Title	Ghi chú
 // | LeetCode ID | Title                                 | Ghi chú                  |
 // | ----------- | ------------------------------------- | ------------------------ |
-// | 53          | Maximum Subarray                      | Kadane’s Algorithm       |
-// | 560         | Subarray Sum Equals K                 | Prefix Sum + Hash Map    |
-// | 325         | Maximum Size Subarray Sum Equals k    | Prefix Sum + Hash Map    |
+// | 53          | Maximum Subarray                      | Kadane’s Algorithm       | x
+// | 560         | Subarray Sum Equals K                 | Prefix Sum + Hash Map    | x
+// | 325         | Maximum Size Subarray Sum Equals k    | Prefix Sum + Hash Map    | -
 // | 363         | Max Sum of Rectangle No Larger Than K | 2D Kadane (khá nâng cao) |
 
 // 🎯 4. Sliding Window – Fixed Size
