@@ -1,13 +1,35 @@
-import { fundamental } from "./first_stage/index.js";
-import { intermediate } from "./second_stage/index.js";
-import { secondary } from "./third_stage/index.js";
+import EmployeeStore from "./hash_table/index.js";
 
-function main() {
-  console.log("Starting the main function");
-  // fundamental.run();
-  // intermediate.run();
-  secondary.run();
-  console.log("Finished the main function");
-}
+const emp = new EmployeeStore();
 
-main();
+emp.add({
+  id: 1,
+  name: "Alice",
+  email: "ALICE@buggysoft.com",
+  nationalId: "036098004388",
+  department: "DEV",
+  skills: ["nodejs", "reactjs", "php"]
+});
+
+emp.add({
+  id: 2,
+  name: "Rebecca",
+  email: "ReBecca@buggysoft.com",
+  nationalId: "036098004389",
+  department: "QA",
+  skills: ["reactjs" , "php"]
+});
+
+emp.add({
+  id: 3,
+  name: "Kattie",
+  email: "Kattie@buggysoft.com",
+  nationalId: "036098004399",
+  department: "QA",
+  skills: ["nodejs", 'php', 'go']
+});
+
+
+
+console.log(emp.updateSkill(1, ['java', 'golang', 'ruby']))
+console.log(emp.listEmpBySkill('php'))
