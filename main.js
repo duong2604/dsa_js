@@ -33,3 +33,5 @@ emp.add({
 
 console.log(emp.updateSkill(1, ['java', 'golang', 'ruby']))
 console.log(emp.listEmpBySkill('php'))
+
+console.log(emp.updateEmail(1, "bb@gmail.com"))

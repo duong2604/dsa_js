@@ -33,7 +33,7 @@ class EmployeeStore {
     this.byEmail = new Map();
     this.byNationalId = new Map();
     this.byDept = new Map();
-    this.bySkill = new Map()
+    this.bySkill = new Map();
   }
 
   // helper
@@ -45,10 +45,10 @@ class EmployeeStore {
   }
 
   _normSkill(sk) {
-    if(sk) {
-        return sk.trim().toLowerCase()
+    if (sk) {
+      return sk.trim().toLowerCase();
     }
-    return ""
+    return "";
   }
 
   _asSet(map, key) {
@@ -64,7 +64,7 @@ class EmployeeStore {
       this.byEmail.set(this._normEmail(emp.email), emp.id);
     if (emp.nationalId) this.byNationalId.set(emp.nationalId, emp.id);
     if (emp.department) this._asSet(this.byDept, emp.department).add(emp.id);
-    for (const sk of emp.skills) this._asSet(this.bySkill, sk).add(emp.id)
+    for (const sk of emp.skills) this._asSet(this.bySkill, sk).add(emp.id);
   }
 
   _removeFrom(map, key, id) {
@@ -102,6 +102,26 @@ class EmployeeStore {
     return id ? this.byId.get(id) : null;
   }
 
+  updateEmail(id, email) {
+    const currEmp = this.byId.get(id);
+    if (!currEmp) throw new Error("Not found!");
+
+    const normNewEmail = (email || "").trim().toLowerCase();
+    if (currEmp.email !== normNewEmail) {
+      if (
+        email &&
+        this.byEmail.has(normNewEmail) &&
+        this.byEmail.get(normNewEmail) !== id
+      ) {
+        throw new Error("Duplicate email!");
+      }
+
+      currEmp.email = email;
+    }
+
+    return currEmp;
+  }
+
   // Get all emp from the dept
   listByDepartment(dept) {
     const ids = this.byDept.get(dept);
@@ -134,19 +154,20 @@ class EmployeeStore {
     return true;
   }
 
-  listEmpBySkill(skill){
-    const ids = this.bySkill.get(this._normSkill(skill))
-    return ids ? [...ids].map(id =>  this.byId.get(id)) : []
+  listEmpBySkill(skill) {
+    const ids = this.bySkill.get(this._normSkill(skill));
+    return ids ? [...ids].map((id) => this.byId.get(id)) : [];
   }
 
-  updateSkill(id, newSkills = []){
-    const currEmp  = this.byId.get(id)
-    if(!currEmp) throw new Error("Not found!")
-    for (const sk of currEmp.skills) this._removeFrom(this.bySkill, this._normSkill(sk), id) 
-    currEmp.skills  = Array.isArray(newSkills) ? newSkills.slice() : []
-    for (const sk of newSkills) this._asSet(this.bySkill, sk).add(id)
-    
-    return currEmp
+  updateSkill(id, newSkills = []) {
+    const currEmp = this.byId.get(id);
+    if (!currEmp) throw new Error("Not found!");
+    for (const sk of currEmp.skills)
+      this._removeFrom(this.bySkill, this._normSkill(sk), id);
+    currEmp.skills = Array.isArray(newSkills) ? newSkills.slice() : [];
+    for (const sk of newSkills) this._asSet(this.bySkill, sk).add(id);
+
+    return currEmp;
   }
 }
 
