@@ -8,7 +8,9 @@ emp.add({
   email: "ALICE@buggysoft.com",
   nationalId: "036098004388",
   department: "DEV",
-  skills: ["nodejs", "reactjs", "php"]
+  skills: ["nodejs", "reactjs", "php"],
+  manager: "Bin",
+  role:"emp"
 });
 
 emp.add({
@@ -17,7 +19,9 @@ emp.add({
   email: "ReBecca@buggysoft.com",
   nationalId: "036098004389",
   department: "QA",
-  skills: ["reactjs" , "php"]
+  skills: ["reactjs" , "php"],
+  manager: "Zoss",
+  role:"emp"
 });
 
 emp.add({
@@ -26,12 +30,11 @@ emp.add({
   email: "Kattie@buggysoft.com",
   nationalId: "036098004399",
   department: "QA",
-  skills: ["nodejs", 'php', 'go']
+  skills: ["nodejs", 'php', 'go'],
+  manager: "Bin",
+  role:"emp"
 });
 
 
 
-console.log(emp.updateSkill(1, ['java', 'golang', 'ruby']))
-console.log(emp.listEmpBySkill('php'))
-
-console.log(emp.updateEmail(1, "bb@gmail.com"))
+console.log(">>>> ", emp.listEmpByDeptRole("DEV", 'emp'))

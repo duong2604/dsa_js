@@ -34,6 +34,8 @@ class EmployeeStore {
     this.byNationalId = new Map();
     this.byDept = new Map();
     this.bySkill = new Map();
+    this.byManager = new Map();
+    this.byDeptRole = new Map();
   }
 
   // helper
@@ -51,6 +53,10 @@ class EmployeeStore {
     return "";
   }
 
+  _keyDeptRole(dept, role){
+    return `${dept || ''}|${role || ''}`
+  }
+
   _asSet(map, key) {
     if (!map.has(key)) {
       map.set(key, new Set());
@@ -65,6 +71,8 @@ class EmployeeStore {
     if (emp.nationalId) this.byNationalId.set(emp.nationalId, emp.id);
     if (emp.department) this._asSet(this.byDept, emp.department).add(emp.id);
     for (const sk of emp.skills) this._asSet(this.bySkill, sk).add(emp.id);
+    if (emp.manager) this._asSet(this.byManager, emp.manager).add(emp.id);
+    this._asSet(this.byDeptRole, this._keyDeptRole(emp.department, emp.role)).add(emp.id)
   }
 
   _removeFrom(map, key, id) {
@@ -168,6 +176,16 @@ class EmployeeStore {
     for (const sk of newSkills) this._asSet(this.bySkill, sk).add(id);
 
     return currEmp;
+  }
+
+  listEmpByManager(manager) {
+    const ids = this.byManager.get(manager);
+    return ids ? [...ids].map((id) => this.byId.get(id)) : [];
+  }
+
+  listEmpByDeptRole(dept, role){
+    const ids = this.byDeptRole.get(this._keyDeptRole(dept, role))
+    return ids ? [...ids].map(id => this.byId.get(id)) : []
   }
 }
 
